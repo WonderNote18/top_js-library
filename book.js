@@ -29,7 +29,8 @@ function render() {
         var bookString = `${book.title} by ${book.author}, ${book.pages} pages.`
         book.read ? bookString += ' Has read.' : bookString += ' Has not read.';
         
-        var bookContent = document.createTextNode(bookString);
+        var bookContent = document.createElement("p");
+        bookContent.textContent = bookString
         bookContainer.appendChild(bookContent);
     })
 }
