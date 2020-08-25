@@ -18,5 +18,18 @@ function addBookToLibrary() {
     userData.pages = window.prompt("Enter the amount of pages in this book: ");
     userData.read = false;
     myLibrary.push(userData);
+    render();
     alert(`Your book ${userData.title} by ${userData.author} with ${userData.pages} pages has been added.`);
+}
+
+function render() {
+    let bookContainer = document.getElementById('bookContainer');
+    bookContainer.innerHTML = "";
+    myLibrary.forEach(function(book) {
+        var bookString = `${book.title} by ${book.author}, ${book.pages} pages.`
+        book.read ? bookString += ' Has read.' : bookString += ' Has not read.';
+        
+        var bookContent = document.createTextNode(bookString);
+        bookContainer.appendChild(bookContent);
+    })
 }
