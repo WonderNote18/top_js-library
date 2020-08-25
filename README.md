@@ -1,4 +1,4 @@
-# **top-js-library**
+# **Library**
 
 ## Description
 
