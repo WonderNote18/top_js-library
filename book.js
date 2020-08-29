@@ -32,5 +32,5 @@ function render() {
         var bookContent = document.createElement("p");
         bookContent.textContent = bookString
         bookContainer.appendChild(bookContent);
-    })
+    });
 }
