@@ -16,7 +16,14 @@ html, body {
     padding: 15px 30px 0px 30px;
 }
 #titleText {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-variant: small-caps;
     color: #e07a5f;
 }
+#headerSeparator {
+    margin: 0px 8px;
+    color: #81b29a;
+    display: block;
+    border: 0;
+    border-top: 3px solid #81b29a;
+  }
