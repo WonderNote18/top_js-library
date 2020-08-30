@@ -2,6 +2,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
     font-size: 62.5%;
 }
 .menuFont {
@@ -12,24 +13,50 @@ html, body {
     background: #f4f1de;
     min-height: 100%;
     min-width: 100%;
+    position: relative;
 }
 #headerContainer {
-    padding: 15px 30px 0px 30px;
+    padding: 0px 30px;
+    background: #e07a5f33;
 }
 #titleText {
     font-size: 3.5rem;
     font-variant: small-caps;
-    letter-spacing: 0.2rem
+    letter-spacing: 0.2rem;
 }
 #subtitleText {
+    color: #c46b53dd;
     margin-left: 2px;
     font-size: 1.2rem;
-    letter-spacing: 0.1rem
+    letter-spacing: 0.1rem;
 }
 #headerSeparator {
-    margin: 2px 8px;
+    margin: 0px;
     color: #81b29a;
     display: block;
     border: 0;
-    border-top: 3px solid #81b29a;
+    border-top: 1vh solid #81b29a;
+}
+#contentContainer {
+    margin-top: 1vh;
+    padding: 1.4vh 3% 5vh 3%;
+    min-height: 30vh;
+    max-height: 68vh;
+}
+#bookSeparator {
+    color: #3d405b;
+    border: 0;
+    border-top: 0.8vh solid #3d405b;
+}
+#newBookButton {
+    
+}
+#footerContainer {
+    background: #3d405b;
+    height: 5vh;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    border-top: 1.5vh groove #3d405b;
 }
