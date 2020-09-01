@@ -38,17 +38,30 @@ html, body {
     border-top: 1vh solid #81b29a;
 }
 #contentContainer {
-    margin-top: 1vh;
-    padding: 1.4vh 3% 5vh 3%;
+    background: #FCF2E2;
+    margin: 2vh 2% 5vh 2%;
+    padding: 1vh 2%;
     min-height: 30vh;
     max-height: 68vh;
+    box-shadow: 0px 0px 2px grey, 0px 0px 4px;
+}
+#newBookButton {
+    font-family: Bookman Old Style;
 }
 #bookSeparator {
     color: #3d405b;
     border: 0;
     border-top: 0.8vh solid #3d405b;
+    margin: 0px;
+    margin-top: 6px;
+    padding: 0px;
 }
-#newBookButton {
+#bookGrid {
+    display:grid;
+    grid-template-columns: 5fr repeat(3, 1.5fr) 1fr;
+
+}
+#bookGridHeader {
     
 }
 #footerContainer {
