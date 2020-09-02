@@ -11,15 +11,17 @@ html, body {
 }
 .gridEntry {
     display: grid;
-    grid-template-columns: 5fr repeat(3, 1.5fr) 1fr;
-    grid-gap: 8px;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
     align-items: center;
     justify-items: center;
-    background-color: #FDF9F1;
-    height: 2.5vh;
+    top: 0.5;
     border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+}
+.gridFont {
+    font-family: Times;
+    font-size: 2.1em;
 }
 #libraryContainer {
     background: #f4f1de;
@@ -51,10 +53,9 @@ html, body {
 }
 #contentContainer {
     background: #FCF2E2;
-    margin: 2vh 2% 5vh 2%;
-    padding: 1vh 2%;
-    min-height: 30vh;
-    max-height: 68vh;
+    margin: 2vh 2% 0 2%;
+    padding: 3vh 3% 0 3%;
+    height: 70%;
     box-shadow: 0px 0px 2px grey, 0px 0px 4px;
 }
 #newBookButton {
@@ -69,15 +70,21 @@ html, body {
     padding: 0px;
 }
 #bookGrid {
-    margin: 0 auto;
+    background-color: #fdf9f1;
+    margin: 0;
+    padding: 0;
     display: grid;
-    grid-template-rows: 2vh repeat(auto-fit, 2vh);
-    min-height: 40vh;
-    height: 60vh;
+    grid-auto-rows: 45px;
+    height: 77%;
+    gap: 0vh;
+    border-width: 0px 1px 1px 1px;
+    border-color: black;
+    border-style: solid;
+    overflow-y: scroll;
 }
 #footerContainer {
     background: #3d405b;
-    height: 5vh;
+    height: 4vh;
     width: 100%;
     bottom: 0;
     left: 0;
