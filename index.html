@@ -15,27 +15,26 @@
             </div>
             <hr id="headerSeparator">
             <div id="contentContainer">
-                <button id="newBookButton">New Book</button>
+                <button id="newBookButton" onclick="addBookToLibrary()">New Book</button>
                 <hr id="bookSeparator">
-                <div id="bookGrid">
-                    <div id="bookGridHeader" class="gridEntry">
-                        <div class="gridCell gridFont gridHeader">
-                            <p>Title</p>
-                        </div>
-                        <div class="gridCell gridFont gridHeader">
-                            <p>Author</p>
-                        </div>
-                        <div class="gridCell gridFont gridHeader">
-                            <p>Pages</p>
-                        </div>
-                        <div class="gridCell gridFont gridHeader">
-                            <p>Status</p>
-                        </div>
-                        <div class="gridCell gridFont gridHeader">
-                            <p>Actions</p>
-                        </div>
+                <div id="bookGridHeader" class="gridEntry">
+                    <div class="gridCell gridFont gridHeaderFont">
+                        <p>Title</p>
+                    </div>
+                    <div class="gridCell gridFont gridHeaderFont">
+                        <p>Author</p>
+                    </div>
+                    <div class="gridCell gridFont gridHeaderFont">
+                        <p>Pages</p>
+                    </div>
+                    <div class="gridCell gridFont gridHeaderFont">
+                        <p>Status</p>
+                    </div>
+                    <div class="gridCell gridFont gridHeaderFont">
+                        <p>Actions</p>
                     </div>
                 </div>
+                <div id="bookGrid"></div>
             </div>
             <footer id="footerContainer">
                 <!-- TODO: Create 2 div for left credits and right links/icons -->
