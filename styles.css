@@ -5,6 +5,10 @@ html, body {
     padding: 0;
     font-size: 62.5%;
 }
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
 .menuFont {
     font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
     color: #e07a5f;
@@ -13,15 +17,23 @@ html, body {
     display: grid;
     margin: 0;
     padding: 0;
-    grid-template-columns: 3fr 2fr 1fr 2fr 2fr;
-    align-items: center;
-    justify-items: center;
-    top: 0.5;
+    grid-template-columns: 3fr 1.5fr 1fr 1.5fr 1fr;
     border-bottom: 1px solid black;
+}
+.gridCell {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    border-right: 1.5px solid black;
 }
 .gridFont {
     font-family: Times;
     font-size: 2.1em;
+    text-align: center;
+}
+.gridHeader {
+    font-weight: bold;
+    border-bottom: 1.5px double black;
 }
 #libraryContainer {
     background: #f4f1de;
@@ -45,18 +57,19 @@ html, body {
     letter-spacing: 0.1rem;
 }
 #headerSeparator {
-    margin: 0px;
+    margin: 0;
+    padding: 0;
     color: #81b29a;
     display: block;
     border: 0;
-    border-top: 1vh solid #81b29a;
+    border-top: 2vh solid #81b29a;
 }
 #contentContainer {
     background: #FCF2E2;
     margin: 2vh 2% 0 2%;
     padding: 3vh 3% 0 3%;
     height: 70%;
-    box-shadow: 0px 0px 2px grey, 0px 0px 4px;
+    box-shadow: 0px 0px 6px grey, 0px 0px 6px grey;
 }
 #newBookButton {
     font-family: Bookman Old Style;
@@ -74,12 +87,10 @@ html, body {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-auto-rows: 45px;
+    grid-auto-rows: 50px;
     height: 77%;
     gap: 0vh;
-    border-width: 0px 1px 1px 1px;
-    border-color: black;
-    border-style: solid;
+    border: 1px solid black;
     overflow-y: scroll;
 }
 #footerContainer {
