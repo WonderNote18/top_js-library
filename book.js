@@ -18,14 +18,13 @@ class Book {
 
 function addBookToLibrary() {
     let bookId;
-    myLibrary.length == 0 ? bookId = 0 : bookId = myLibrary.length;
+    myLibrary.length == 0 ? bookId = 0 : bookId = myLibrary[myLibrary.length - 1].id + 1;
     let bookTitle = window.prompt("Enter your book's Title");
     let bookAuthor = window.prompt("Enter the Author of the book");
     let bookPages = window.prompt("Enter the amount of pages in this book");
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
     newBook.prototype = Object.create(Book.prototype);
-    newBook.addToLibrary();
     myLibrary.push(newBook);
 
     addToGrid(newBook.id);
@@ -34,35 +33,45 @@ function addBookToLibrary() {
 }
 
 function addToGrid(libraryId) {
-    let bookContainer = document.createElement("div");
     let bookData = myLibrary[libraryId];
-    bookContainer.setAttribute("id", "bookContainer" + libraryId);
+
+    let bookContainer = document.createElement("div");
     bookContainer.setAttribute("class", "gridEntry");
     document.getElementById("bookGrid").appendChild(bookContainer);
 
     let dataKeys = Object.keys(bookData);
-    dataKeys.splice(dataKeys.indexOf('id'), 1);
-    dataKeys.splice(dataKeys.indexOf('prototype'), 1);
-    dataKeys.splice(dataKeys.indexOf('read'), 1);
+    let spamKeys = ['id', 'prototype', 'read'];
+    spamKeys.map(function(key) {
+        dataKeys.splice(dataKeys.indexOf(key), 1);
+    });
 
     for (i = 0; i < dataKeys.length; i++) {
-        let dataElement = document.createElement("p");
+        let dataElement = document.createElement("div");
         let dataKey = dataKeys[i];
         dataElement.setAttribute("id", dataKey + libraryId);
-        dataElement.setAttribute("class", "gridFont");
-        dataElement.textContent = bookData[dataKey];
+        dataElement.setAttribute("class", "gridCell gridFont");
         bookContainer.appendChild(dataElement);
+
+        let dataValue = document.createElement("p");
+        dataValue.textContent = bookData[dataKey];
+        dataElement.appendChild(dataValue);
     }
 
-    let readElement = document.createElement("p");
+    let readElement = document.createElement("div");
     readElement.setAttribute("id", "read" + libraryId);
-    readElement.setAttribute("class", "gridFont gridReadFalse");
-    readElement.textContent = "Not Completed";
+    readElement.setAttribute("class", "gridCell gridFont gridReadFalse");
     bookContainer.appendChild(readElement);
+
+    let readText = document.createElement("p");
+    readText.textContent = "Not Completed";
+    readElement.appendChild(readText);
     
     let actionElement = document.createElement("div");
     actionElement.setAttribute("id", "actions" + libraryId);
-    actionElement.setAttribute("class", "gridFont gridActions");
-    actionElement.textContent = "TEMP";
+    actionElement.setAttribute("class", "gridCell gridFont gridActions");
     bookContainer.appendChild(actionElement);
+
+    let actionText = document.createElement("p");
+    actionText.textContent = "TEMP";
+    actionElement.appendChild(actionText);
 }
