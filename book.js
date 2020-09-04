@@ -9,9 +9,18 @@ class Book {
         this.read = false;
     }
     markAsRead() {
-        this.read = true;
-        document.getElementById("read" + id).setAttribute("class", "gridFont gridReadTrue");
-        document.getElementById("read" + id).textContent = "Completed";
+        if (this.read == false) {
+            this.read = true;
+            let readCell = document.getElementById("read" + this.id);
+            let readText = readCell.getElementsByTagName("p")[0];
+            let readButton = document.getElementById("readBook" + this.id);
+
+            readCell.setAttribute("class", "gridCell gridFont gridReadTrue");
+            readText.textContent = "Completed";
+            readButton.disabled = true;
+
+            alert(`You have marked ${this.title} by ${this.author} as read!`);
+        }
     }
 }
 
@@ -21,7 +30,12 @@ function addBookToLibrary() {
     myLibrary.length == 0 ? bookId = 0 : bookId = myLibrary[myLibrary.length - 1].id + 1;
     let bookTitle = window.prompt("Enter your book's Title");
     let bookAuthor = window.prompt("Enter the Author of the book");
-    let bookPages = window.prompt("Enter the amount of pages in this book");
+    let bookPages = parseInt(window.prompt("Enter the amount of pages in this book"));
+
+    if (isNaN(bookPages) == true) {
+        alert("An invalid number was entered");
+        return
+    }
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
     newBook.prototype = Object.create(Book.prototype);
@@ -71,7 +85,10 @@ function addToGrid(libraryId) {
     actionElement.setAttribute("class", "gridCell gridFont gridActions");
     bookContainer.appendChild(actionElement);
 
-    let actionText = document.createElement("p");
-    actionText.textContent = "TEMP";
-    actionElement.appendChild(actionText);
+    let actionButton = document.createElement("button");
+    actionButton.setAttribute("id", "readBook" + libraryId);
+    actionButton.setAttribute("class", "readButton");
+    actionButton.setAttribute("onclick", `myLibrary[${libraryId}].markAsRead()`);
+    actionButton.textContent = "READ";
+    actionElement.appendChild(actionButton);
 }
