@@ -30,8 +30,11 @@ function addBookToLibrary() {
     let bookId;
     myLibrary.length == 0 ? bookId = 0 : bookId = myLibrary[myLibrary.length - 1].id + 1;
     let bookTitle = window.prompt("Enter your book's Title");
-    if (bookTitle.length > 150) {
-        alert("A book title with a length greater than 150 was entered.");
+    if (bookTitle.length > 100 || 
+        (bookTitle.split(' ').length <= 2 && 
+        (bookTitle.split(' ')[0].length > 30 || 
+        bookTitle.split(' ')[0].length > 30 ))) {
+        alert("The title entered is too long.");
         return;
     }
     if (bookTitle.length == 0) {
@@ -39,8 +42,11 @@ function addBookToLibrary() {
         return;
     }
     let bookAuthor = window.prompt("Enter the Author of the book");
-    if (bookAuthor.length > 150) {
-        alert("A book author with a length greater than 150 was entered.");
+    if (bookTitle.length > 100 || 
+        (bookTitle.split(' ').length <= 2 && 
+        (bookTitle.split(' ')[0].length > 30 || 
+        bookTitle.split(' ')[0].length > 30 ))) {
+        alert("The author entered is too long.");
         return;
     }
     if (bookAuthor.length == 0) {
@@ -49,13 +55,9 @@ function addBookToLibrary() {
     }
 
     let bookPages = parseInt(window.prompt("Enter the amount of pages in this book"));
-    if (isNaN(bookPages) == true) {
+    if (isNaN(bookPages) == true || bookPages > 100000) {
         alert("An invalid number was entered");
         return
-    }
-    if (bookPages.length == 0) {
-        alert("A book author is required.");
-        return;
     }
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
