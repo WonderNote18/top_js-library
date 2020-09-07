@@ -30,12 +30,32 @@ function addBookToLibrary() {
     let bookId;
     myLibrary.length == 0 ? bookId = 0 : bookId = myLibrary[myLibrary.length - 1].id + 1;
     let bookTitle = window.prompt("Enter your book's Title");
+    if (bookTitle.length > 150) {
+        alert("A book title with a length greater than 150 was entered.");
+        return;
+    }
+    if (bookTitle.length == 0) {
+        alert("A book title is required.");
+        return;
+    }
     let bookAuthor = window.prompt("Enter the Author of the book");
-    let bookPages = parseInt(window.prompt("Enter the amount of pages in this book"));
+    if (bookAuthor.length > 150) {
+        alert("A book author with a length greater than 150 was entered.");
+        return;
+    }
+    if (bookAuthor.length == 0) {
+        alert("A book author is required.");
+        return;
+    }
 
+    let bookPages = parseInt(window.prompt("Enter the amount of pages in this book"));
     if (isNaN(bookPages) == true) {
         alert("An invalid number was entered");
         return
+    }
+    if (bookPages.length == 0) {
+        alert("A book author is required.");
+        return;
     }
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
