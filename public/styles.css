@@ -1,13 +1,20 @@
 
 html, body {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
     font-size: 62.5%;
+    scrollbar-width: none !important;
+}
+a:link, a:visited {
+    color: inherit;
+    text-decoration: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
 }
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+    display: none;
 }
 .menuFont {
     font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
@@ -67,15 +74,25 @@ html, body {
     color: #cccccc;
     border: 3px solid #666666;
 }
+.footerFont {
+    font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
+    color: #FDF9F1CC !important;
+    font-size: 2em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
 #libraryContainer {
     background: #f4f1de;
-    min-height: 100%;
+    min-height: 100vh;
     min-width: 100%;
     position: relative;
 }
 #headerContainer {
-    padding: 0px 30px;
+    padding: 0px 35px;
+    margin: 0;
+    display: grid;
     background: #e07a5f33;
+    grid-template-columns: 7fr 2fr;
 }
 #titleText {
     font-size: 3.5rem;
@@ -98,11 +115,13 @@ html, body {
 }
 #contentContainer {
     background: #FCF2E2;
-    margin: 2vh 2% 0 2%;
-    padding: 3vh 3% 3vh 3%;
-    height: 70%;
+    margin: 2vh auto 0 auto;
+    padding: 3vh 3% 8vh 3%;
+    height: 60%;
+    max-width: 80%;
     box-shadow: 0px 0px 6px grey, 0px 0px 6px grey;
     overflow: scroll;
+    scrollbar-width: none !important;
 }
 #newBookButton {
     display: inline-block;
@@ -145,17 +164,65 @@ html, body {
     padding: 0;
     display: grid;
     grid-auto-rows: 50px;
-    height: 79%;
+    height: 80%;
     gap: 0vh;
     border: 1px solid black;
     overflow-y: scroll;
+    scrollbar-width: none !important;
 }
 #footerContainer {
     background: #3d405b;
-    height: 4vh;
-    width: 100%;
+    height: 6vh;
+    margin: 0;
+    padding: 0 2vw;
     bottom: 0;
     left: 0;
+    right: 0;
     position: absolute;
-    border-top: 1.5vh groove #3d405b;
+    border-top: 1.25vh groove #3d405b;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    grid-template-rows: 6vh;
+    column-gap: 30vw;
+    overflow: hidden;
+}
+#footerCredits {
+    text-align: left;
+    align-items: center;
+    display: grid;
+    margin: 0;
+    padding: 0;
+}
+#footerCreditsText {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+#footerLink {
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 6vh;
+}
+#footerLinkText {
+    align-items: center;
+    width: auto;
+    text-decoration: none;
+}
+#footerLinkText:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+#footerImages {
+    text-align: center;
+    display: block;
+}
+#footerGithubIcon {
+    justify-content: center;
+    max-height: 6vh;
 }

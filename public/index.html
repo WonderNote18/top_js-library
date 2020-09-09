@@ -2,6 +2,52 @@
     <head>
         <title>Library - The Odin Project</title>
         <link rel="stylesheet" href="styles.css">
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+        <!-- FirebaseUI for Authentication -->
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+        
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+              apiKey: "AIzaSyBNDaaqkuabXasqBo5m3i2ViwH7hc2HEf8",
+              authDomain: "top-js-library.firebaseapp.com",
+              databaseURL: "https://top-js-library.firebaseio.com",
+              projectId: "top-js-library",
+              storageBucket: "top-js-library.appspot.com",
+              messagingSenderId: "1085660323907",
+              appId: "1:1085660323907:web:6a24dfa4cc0bc6e7c1b4f6",
+              measurementId: "G-PYJRWP2K8K"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+        </script>
+        <script>
+            // FirebaseUI config
+            var uiConfig = {
+                signInFlow: 'popup',
+                signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                ],
+                // tosUrl and privacyPolicyUrl accept either url string or a callback
+                // function.
+            };
+
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            // The start method will wait until the DOM is loaded.
+            // ui.start('#firebaseui-auth-container', uiConfig);
+        </script>
     </head>
     <body>
         <div id="libraryContainer">
@@ -11,6 +57,9 @@
                     <div id='subtitleText'>
                         A small assignment made for The Odin Project
                     </div>
+                </div>
+                <div id='firebaseui-auth-container' class='signedOut'>
+                    <div></div>
                 </div>
             </div>
             <hr id="headerSeparator">
@@ -36,20 +85,24 @@
                 </div>
                 <div id="bookGrid"></div>
             </div>
-            <footer id="footerContainer">
-                <!-- TODO: Create 2 div for left credits and right links/icons -->
+            <footer id="footerContainer" class="footerFont">
+                <div id="footerCredits">
+                    <p id="footerCreditsText">Created by Hector Almanza</p>
+                </div>
+                <div id="footerLink">
+                    <a href="https://github.com/WonderNote18/top_js-library">
+                        <span id="footerLinkText">
+                            View on Github
+                        </span>
+                    </a>
+                    <div id="footerImages">
+                        <a href="https://github.com/WonderNote18/top_js-library">
+                            <img id="footerGithubIcon" src="data/github_icon.png" alt="View on GitHub">
+                        </a>
+                    </div>
+                </div>
             </footer>
         </div>
-        <pre id='object'></pre>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
-        
         <script src="book.js"></script>
     </body>
 </html>

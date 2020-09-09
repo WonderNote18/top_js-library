@@ -1,18 +1,4 @@
-// Your web app's Firebase configuration
-let firebaseConfig = {
-    apiKey: "AIzaSyBNDaaqkuabXasqBo5m3i2ViwH7hc2HEf8",
-    authDomain: "top-js-library.firebaseapp.com",
-    databaseURL: "https://top-js-library.firebaseio.com",
-    projectId: "top-js-library",
-    storageBucket: "top-js-library.appspot.com",
-    messagingSenderId: "1085660323907",
-    appId: "1:1085660323907:web:6a24dfa4cc0bc6e7c1b4f6",
-    measurementId: "G-PYJRWP2K8K"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-let database = firebase.database();
+
 
 let myLibrary = [];
 
@@ -68,7 +54,6 @@ function addBookToLibrary() {
         alert("A book author is required.");
         return;
     }
-
     let bookPages = parseInt(window.prompt("Enter the amount of pages in this book"));
     if (isNaN(bookPages) == true || bookPages > 100000) {
         alert("An invalid number was entered");
@@ -77,7 +62,7 @@ function addBookToLibrary() {
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
     newBook.prototype = Object.create(Book.prototype);
-    myLibrary.push(newBook);
+    // myLibrary.push(newBook);
 
     addToGrid(newBook.id);
     
