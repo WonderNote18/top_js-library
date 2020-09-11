@@ -36,20 +36,34 @@
             var uiConfig = {
                 signInFlow: 'popup',
                 signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                ],
-                // tosUrl and privacyPolicyUrl accept either url string or a callback
-                // function.
+                    {
+                        // Leave the lines as is for the providers you want to offer your users.
+                        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                        requireDisplayName: true,
+                        forceSameDevice: true,
+
+                        // tosUrl and privacyPolicyUrl accept either url string or a callback
+                        // function.
+                    },
+                    {
+                        // Leave the lines as is for the providers you want to offer your users.
+                        provider: firebase.auth.AnonymousAuthProvider.PROVIDER_ID
+                        // tosUrl and privacyPolicyUrl accept either url string or a callback
+                        // function.
+                    }
+                ]
             };
 
             // Initialize the FirebaseUI Widget using Firebase.
             var ui = new firebaseui.auth.AuthUI(firebase.auth());
             // The start method will wait until the DOM is loaded.
-            // ui.start('#firebaseui-auth-container', uiConfig);
+            ui.start('#firebaseui-auth-container', uiConfig);
         </script>
     </head>
     <body>
+        <div id="headerFirebase" style="display: none;">
+            <div id='firebaseui-auth-container' class='signedOut'></div>
+        </div>
         <div id="libraryContainer">
             <div id="headerContainer">
                 <div id="headerTitle" class="menuFont">
@@ -58,9 +72,7 @@
                         A small assignment made for The Odin Project
                     </div>
                 </div>
-                <div id='firebaseui-auth-container' class='signedOut'>
-                    <div></div>
-                </div>
+                <button id="signInButton">Sign In</button>
             </div>
             <hr id="headerSeparator">
             <div id="contentContainer">

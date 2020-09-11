@@ -24,7 +24,7 @@ a:link, a:visited {
     display: grid;
     margin: 0;
     padding: 0;
-    grid-template-columns: 3fr 2fr 1fr 1.5fr 1fr;
+    grid-template-columns: 2.5fr 1.5fr 1fr 1.5fr 1fr;
     border-bottom: 1px solid #00000044;
     overflow: auto;
 }
@@ -88,22 +88,95 @@ a:link, a:visited {
     position: relative;
 }
 #headerContainer {
-    padding: 0px 35px;
+    padding: 0px 15px 0 30px;
     margin: 0;
     display: grid;
     background: #e07a5f33;
-    grid-template-columns: 7fr 2fr;
+    grid-template-columns: 12fr 1fr;
+    grid-column-gap: 2vw;
+}
+#headerTitle {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 60px;
+    align-content: center;
+    vertical-align: center;
+    overflow: hidden;
 }
 #titleText {
     font-size: 3.5rem;
     font-variant: small-caps;
     letter-spacing: 0.2rem;
+    position: relative;
+    margin: 0;
+    margin-bottom: -4px;
 }
 #subtitleText {
     color: #c46b53dd;
     margin-left: 2px;
     font-size: 1.2rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 1.1px;
+    position: relative;
+    margin: 0;
+    margin-left: 3px;
+    text-overflow: clip;
+}
+#headerFirebase {
+    margin: 0;
+    padding: 0;
+    height: 25vh;
+    /*! max-height: 50vh; */
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#firebaseui-auth-container {
+
+}
+#signInButton {
+   background: #797EA6;
+   background-image: -webkit-linear-gradient(top, #797EA6, #3D405B);
+   background-image: -moz-linear-gradient(top, #797EA6, #3D405B);
+   background-image: -ms-linear-gradient(top, #797EA6, #3D405B);
+   background-image: -o-linear-gradient(top, #797EA6, #3D405B);
+   background-image: linear-gradient(to bottom, #797EA6, #3D405B);
+   -webkit-border-radius: 14px;
+   -moz-border-radius: 14px;
+   border-radius: 14px;
+   color: #FFFFFF;
+   font-family: Sans;
+   font-size: 14px;
+   font-weight: lighter;
+   letter-spacing: 0.8px;
+   height: 38px;
+   width: 98px;
+   margin: auto;
+   right: 0;
+   box-shadow: 3px 5px 9px 0px #000000;
+   -webkit-box-shadow: 3px 5px 9px 0px #000000;
+   -moz-box-shadow: 6px 10px 18px 0px #000000;
+   text-shadow: 5px 3px 6px #000000;
+   border: solid #363850 1px;
+   text-decoration: none;
+   display: inline-block;
+   position: relative;
+   cursor: pointer;
+   text-align: center;
+   align-items: center;
+   transition: all 0.1s;
+}
+#signInButton:hover {
+   border: solid #1F202E 1px;
+   background: #616691;
+   background-image: -webkit-linear-gradient(top, #616691, #363850);
+   background-image: -moz-linear-gradient(top, #616691, #363850);
+   background-image: -ms-linear-gradient(top, #616691, #363850);
+   background-image: -o-linear-gradient(top, #616691, #363850);
+   background-image: linear-gradient(to bottom, #616691, #363850);
+   -webkit-border-radius: 18px;
+   -moz-border-radius: 18px;
+   border-radius: 18px;
+   text-decoration: none;
+   transition: all 0.3s;
 }
 #headerSeparator {
     margin: 0;
@@ -111,23 +184,24 @@ a:link, a:visited {
     color: #81b29a;
     display: block;
     border: 0;
-    border-top: 2vh solid #81b29a;
+    border-top: 1vh solid #81b29a;
 }
 #contentContainer {
     background: #FCF2E2;
-    margin: 2vh auto 0 auto;
+    margin: 3vh auto 0 auto;
     padding: 3vh 3% 8vh 3%;
     height: 60%;
-    max-width: 80%;
+    max-width: 75%;
     box-shadow: 0px 0px 6px grey, 0px 0px 6px grey;
     overflow: scroll;
     scrollbar-width: none !important;
 }
 #newBookButton {
     display: inline-block;
-    padding: 0.3em 1.1em;
+    padding: 8px 16px;
     margin: 0 0.3em 0.3em 0;
     border-radius: 2em;
+    border-color: #F8F6E9;
     box-sizing: border-box;
     text-decoration: none;
     font-family: Bookman Old Style;
@@ -138,6 +212,7 @@ a:link, a:visited {
 }
 #newBookButton:hover {
     background-color: #497760;
+    border-color: #4F5377;
     font-weight: bold;
 }
 #bookSeparator {
@@ -152,9 +227,10 @@ a:link, a:visited {
     background-color: #fdf9f1;
     margin: 0;
     padding: 0;
+    padding-right: 3px;
     display: grid;
     gap: 0vh;
-    grid-template-columns: 3fr 2fr 1fr 1.5fr 1fr;
+    grid-template-columns: 2.5fr 1.5r 1fr 1.5fr 1fr;
     border: 1.5px solid black;
     overflow: hidden;
 }
@@ -164,10 +240,10 @@ a:link, a:visited {
     padding: 0;
     display: grid;
     grid-auto-rows: 50px;
-    height: 80%;
+    height: 75%;
     gap: 0vh;
     border: 1px solid black;
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: none !important;
 }
 #footerContainer {
