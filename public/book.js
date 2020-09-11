@@ -62,7 +62,8 @@ function addBookToLibrary() {
 
     let newBook = new Book(bookId, bookTitle, bookAuthor, bookPages);
     newBook.prototype = Object.create(Book.prototype);
-    // myLibrary.push(newBook);
+    myLibrary.push(newBook);
+    // TODO: Change to firebase data
 
     addToGrid(newBook.id);
     
