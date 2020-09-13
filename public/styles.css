@@ -125,7 +125,6 @@ a:link, a:visited {
     margin: 0;
     padding: 0;
     height: 25vh;
-    /*! max-height: 50vh; */
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -248,7 +247,7 @@ a:link, a:visited {
 }
 #footerContainer {
     background: #3d405b;
-    height: 6vh;
+    height: 6.2vh;
     margin: 0;
     padding: 0 2vw;
     bottom: 0;
@@ -259,7 +258,7 @@ a:link, a:visited {
     text-align: center;
     display: grid;
     grid-template-columns: 5fr 5fr;
-    grid-template-rows: 6vh;
+    grid-template-rows: 6.2vh;
     column-gap: 30vw;
     overflow: hidden;
 }
@@ -288,11 +287,12 @@ a:link, a:visited {
     align-items: center;
     width: auto;
     text-decoration: none;
+    font-weight: normal;
+    transition: all 0.5s;
 }
 #footerLinkText:hover {
     text-decoration: underline;
-    font-weight: bold;
-    font-size: 0.95em;
+    font-size: 1.1em;
 }
 #footerImages {
     text-align: center;
@@ -301,4 +301,10 @@ a:link, a:visited {
 #footerGithubIcon {
     justify-content: center;
     max-height: 6vh;
+    transition: all 0.2s;
+    border-radius: 6.2vh;
+    border: 3px solid #88888800;
+}
+#footerGithubIcon:hover {
+    border-color: #888888dd;
 }
