@@ -13,12 +13,128 @@ a:link, a:visited {
     font-family: inherit;
     letter-spacing: inherit;
 }
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    border-radius: 0;
+    outline: none;
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    padding: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+    overflow: visible;
+    /*! margin-bottom: 4px; */
+}
+label {
+    color: gray;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    cursor: text;
+    transition: color .2s ease-out, -webkit-transform .2s ease-out;
+    transform-origin: 0% 100%;
+    text-align: initial;
+    transform: translateY(-10px);
+}
 ::-webkit-scrollbar {
     display: none;
+}
+.modalOverlay {
+    background-color: #eee !important;
+    opacity: 0.2;
+    transition: all 0.3s;
 }
 .menuFont {
     font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
     color: #e07a5f;
+}
+.menuButton {
+    background: #797EA6;
+    background-image: -webkit-linear-gradient(top, #797EA6, #3D405B);
+    background-image: -moz-linear-gradient(top, #797EA6, #3D405B);
+    background-image: -ms-linear-gradient(top, #797EA6, #3D405B);
+    background-image: -o-linear-gradient(top, #797EA6, #3D405B);
+    background-image: linear-gradient(to bottom, #797EA6, #3D405B);
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-family: Sans;
+    font-size: 15px;
+    font-weight: normal;
+    letter-spacing: 0.8px;
+    height: 36px;
+    width: 92px;
+    margin: 0;
+    box-shadow: 2px 3px 6px 0px #000000;
+    -webkit-box-shadow: 2px 3px 6px 0px #000000;
+    -moz-box-shadow: 4px 6px 12px 0px #000000;
+    text-shadow: 2px 3px 6px #000000;
+    border: solid #363850 1px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.1s;
+}
+.menuButton:hover {
+    border: solid #1F202E 1px;
+    background: #616691;
+    background-image: -webkit-linear-gradient(top, #616691, #363850);
+    background-image: -moz-linear-gradient(top, #616691, #363850);
+    background-image: -ms-linear-gradient(top, #616691, #363850);
+    background-image: -o-linear-gradient(top, #616691, #363850);
+    background-image: linear-gradient(to bottom, #616691, #363850);
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+.modal {
+    display: none;
+    z-index: 1003;
+    opacity: 1;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    background-color: #fafafa;
+    padding: 0;
+    max-height: 70%;
+    width: 55%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+    box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14),0 9px 46px 8px rgba(0,0,0,0.12),0 11px 15px -7px rgba(0,0,0,0.2);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #121212;
+    margin-top: 20px;
+    line-height: 1.5;
+    font-size: 1.3rem;
+    transition: all 0.3s;
+}
+.modalContent {
+    padding: 24px;
+}
+.modalHeader {
+    margin: 1.52rem 0 .912rem 0;
+    line-height: 110%;
+    font-size: 2.45rem;
+    font-weight: 400;
+    padding-bottom: 22px;
+}
+.userInput {
+    position: relative;
+    margin: 1rem 0;
+    box-sizing: inherit;
+    padding-bottom: 8px;
 }
 .gridEntry {
     display: grid;
@@ -92,7 +208,7 @@ a:link, a:visited {
     margin: 0;
     display: grid;
     background: #e07a5f33;
-    grid-template-columns: 12fr 1fr;
+    grid-template-columns: 10fr 3fr;
     grid-column-gap: 2vw;
 }
 #headerTitle {
@@ -121,61 +237,21 @@ a:link, a:visited {
     margin-left: 3px;
     text-overflow: clip;
 }
-#headerFirebase {
-    margin: 0;
+#headerMenu {
+    margin: 0 auto;
     padding: 0;
-    height: 25vh;
-    overflow: scroll;
-    overflow-x: hidden;
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 110px);
+    justify-content: right;
 }
-#firebaseui-auth-container {
-
-}
-#signInButton {
-   background: #797EA6;
-   background-image: -webkit-linear-gradient(top, #797EA6, #3D405B);
-   background-image: -moz-linear-gradient(top, #797EA6, #3D405B);
-   background-image: -ms-linear-gradient(top, #797EA6, #3D405B);
-   background-image: -o-linear-gradient(top, #797EA6, #3D405B);
-   background-image: linear-gradient(to bottom, #797EA6, #3D405B);
-   -webkit-border-radius: 14px;
-   -moz-border-radius: 14px;
-   border-radius: 14px;
-   color: #FFFFFF;
-   font-family: Sans;
-   font-size: 14px;
-   font-weight: lighter;
-   letter-spacing: 0.8px;
-   height: 38px;
-   width: 98px;
-   margin: auto;
-   right: 0;
-   box-shadow: 3px 5px 9px 0px #000000;
-   -webkit-box-shadow: 3px 5px 9px 0px #000000;
-   -moz-box-shadow: 6px 10px 18px 0px #000000;
-   text-shadow: 5px 3px 6px #000000;
-   border: solid #363850 1px;
-   text-decoration: none;
-   display: inline-block;
-   position: relative;
-   cursor: pointer;
-   text-align: center;
-   align-items: center;
-   transition: all 0.1s;
-}
-#signInButton:hover {
-   border: solid #1F202E 1px;
-   background: #616691;
-   background-image: -webkit-linear-gradient(top, #616691, #363850);
-   background-image: -moz-linear-gradient(top, #616691, #363850);
-   background-image: -ms-linear-gradient(top, #616691, #363850);
-   background-image: -o-linear-gradient(top, #616691, #363850);
-   background-image: linear-gradient(to bottom, #616691, #363850);
-   -webkit-border-radius: 18px;
-   -moz-border-radius: 18px;
-   border-radius: 18px;
-   text-decoration: none;
-   transition: all 0.3s;
+#headerMenuSection {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    margin: auto;
 }
 #headerSeparator {
     margin: 0;

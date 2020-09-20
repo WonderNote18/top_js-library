@@ -5,16 +5,10 @@
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
 
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <!-- SDKs for Firebase Products -->
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
-
         <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-        <!-- FirebaseUI for Authentication -->
-        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-        
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
         <script>
             // Your web app's Firebase configuration
             var firebaseConfig = {
@@ -30,54 +24,85 @@
             // Initialize Firebase
             firebase.initializeApp(firebaseConfig);
             firebase.analytics();
-        </script>
-        <script>
-            // FirebaseUI config
-            var uiConfig = {
-                signInFlow: 'popup',
-                signInOptions: [
-                    {
-                        // Leave the lines as is for the providers you want to offer your users.
-                        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                        requireDisplayName: true,
-                        forceSameDevice: true,
-
-                        // tosUrl and privacyPolicyUrl accept either url string or a callback
-                        // function.
-                    },
-                    {
-                        // Leave the lines as is for the providers you want to offer your users.
-                        provider: firebase.auth.AnonymousAuthProvider.PROVIDER_ID
-                        // tosUrl and privacyPolicyUrl accept either url string or a callback
-                        // function.
-                    }
-                ]
-            };
-
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-            // The start method will wait until the DOM is loaded.
-            ui.start('#firebaseui-auth-container', uiConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
         </script>
     </head>
     <body>
-        <div id="headerFirebase" style="display: none;">
-            <div id='firebaseui-auth-container' class='signedOut'></div>
+        <!-- Account Info Modal -->
+        <div id="modal-account" class="modal">
+            <div class="modalContent">
+                <h4 class="modalHeader">Account Info</h4>
+                <div class="account-details"></div>
+            </div>
         </div>
-        <div id="libraryContainer">
+        <!-- User Signup Modal -->
+        <div id="modal-signup" class="modal">
+            <div class="modalContent">
+                <h4 class="modalHeader">Sign Up</h4>
+                <form id="signupForm">
+                    <div class="userInput">
+                        <input type="email" id="signup-email" required />
+                        <label for="signup-email">Email Address</label>
+                    </div>
+                    <div class="userInput">
+                        <input type="password" id="signup-password" required />
+                        <label for="signup-password">Create Password</label>
+                    </div>
+                    <button class="menuButton">Sign Up</button>
+                </form>
+            </div>
+        </div>
+        <!-- User Login Modal -->
+        <div id="modal-login" class="modal">
+            <div class="modalContent">
+                <h4 class="modalHeader">Login</h4>
+                <form id="loginForm">
+                    <div class="userInput">
+                        <input type="email" id="login-email" required />
+                        <label for="login-email">Email Address</label>
+                    </div>
+                    <div class="userInput">
+                        <input type="password" id="login-password" required />
+                        <label for="login-password">Password</label>
+                    </div>
+                    <button class="menuButton">Login</button>
+                </form>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div id="libraryContainer" class="">
+            <!-- Page Header -->
             <div id="headerContainer">
+                <!-- Header Title and Text -->
                 <div id="headerTitle" class="menuFont">
                     <div id="titleText">Library</div>
                     <div id='subtitleText'>
                         A small assignment made for The Odin Project
                     </div>
                 </div>
-                <button id="signInButton">Sign In</button>
+                <!-- Header Account Menu -->
+                <div id="headerMenu">
+                    <div id="headerMenuSection" class="logged-out">
+                        <button id="loginButton" class='menuButton' data-target="modal-login">Log In</button>
+                    </div>
+                    <div id="headerMenuSection" class="logged-out">
+                        <button id="signupButton" class='menuButton' data-target="modal-signup">Sign Up</button>
+                    </div>
+                    <!-- <div id="headerMenuSection" class="logged-in">
+                        <button id="accountButton" class='menuButton' data-target="modal-account">Account</button>
+                    </div>
+                    <div id="headerMenuSection" class="logged-in">
+                        <button id="logoutButton" class='menuButton'>Log Out</button>
+                    </div> -->
+                </div>
             </div>
             <hr id="headerSeparator">
+            <!-- Main Content -->
             <div id="contentContainer">
                 <button id="newBookButton" onclick="addBookToLibrary()">New Book</button>
                 <hr id="bookSeparator">
+                <!-- Library Grid Header -->
                 <div id="bookGridHeader" class="gridEntry">
                     <div class="gridCell gridFont gridHeaderFont">
                         <p>Title</p>
@@ -95,12 +120,16 @@
                         <p>Actions</p>
                     </div>
                 </div>
+                <!-- Library Items Container -->
                 <div id="bookGrid"></div>
             </div>
+            <!-- Page Footer -->
             <footer id="footerContainer" class="footerFont">
+                <!-- Left Author Credit -->
                 <div id="footerCredits">
                     <p id="footerCreditsText">Created by Hector Almanza</p>
                 </div>
+                <!-- Right URL Credit -->
                 <div id="footerLink">
                     <a href="https://github.com/WonderNote18/top_js-library">
                         <span id="footerLinkText">
@@ -115,6 +144,9 @@
                 </div>
             </footer>
         </div>
-        <script src="book.js"></script>
+        <!-- Authentication and Status -->
+        <script src="scripts/auth.js"></script>
+        <!-- Library App -->
+        <script src="scripts/book.js"></script>
     </body>
 </html>
