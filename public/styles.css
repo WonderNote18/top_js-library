@@ -35,7 +35,7 @@ label {
     position: absolute;
     top: 0;
     left: 0;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: text;
     transition: color .2s ease-out, -webkit-transform .2s ease-out;
     transform-origin: 0% 100%;
@@ -54,7 +54,7 @@ label {
 .modalOverlay {
     background: #eeeeee !important;
     opacity: 0.1;
-    transition: all 0.5s;
+    transition: all 0.4s;
 }
 .menuFont {
     font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
@@ -137,9 +137,9 @@ label {
     right: 0;
     background-color: #fafafa;
     padding: 0;
-    min-height: 50%;
+    min-height: 40%;
     max-height: 65%;
-    width: 55%;
+    width: 45%;
     margin: auto;
     overflow-y: auto;
     border-radius: 2px;
@@ -150,7 +150,7 @@ label {
     margin-top: 20px;
     line-height: 1.5;
     font-size: 1.3rem;
-    transition: all 0.5s;
+    transition: all 0.2s;
 }
 .modalContent {
     padding: 24px;

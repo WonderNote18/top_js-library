@@ -90,6 +90,14 @@ signupForm.addEventListener('submit', (e) => {
     // Get User Info
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
+    const confirm = signupForm['signup-password-confirm'].value;
+
+    // Check if both passwords are the same, otherwise reset modal and throw error
+    if (password != confirm) {
+        resetModal("signup");
+        notifyUser("fail", "Error: Passwords must be matching");
+        return;
+    };
 
     // Sign up User Info
     auth.createUserWithEmailAndPassword(email, password).then(credentials => {
@@ -97,7 +105,7 @@ signupForm.addEventListener('submit', (e) => {
         // Setting username value to email string before '@'
         //      ex. 'abc123@email.com' => 'abc123'
         let currentDate = new Date();
-        let formattedDate = `${currentDate.getMonth() + 1}/${currentDate.getDate()}/${currentDate.getFullYear()} ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getSeconds()}`
+        let formattedDate = currentDate.toLocaleString('en-US', { timeZone: "America/Chicago"});
         
         // TODO: Check if anonLibrary needs to be converted into Firestore
         db.collection('users').doc(credentials.user.uid).set({
@@ -105,6 +113,29 @@ signupForm.addEventListener('submit', (e) => {
             booksRead: 0,
             booksTotal: 0,
             createdOn: formattedDate
+        }).then(() => {
+            // Check if anonLibrary needs to be converted into Firestore
+            if (anonLibrary.length > 0) {
+                let bookRef = db.collection('users').doc(credentials.user.uid).collection('books');
+                let userDoc = db.collection('users').doc(credentials.user.uid);
+
+                // Go through each book, increment counters for user info
+                anonLibrary.forEach(book => {
+                    userDoc.update({
+                        booksTotal: firebase.firestore.FieldValue.increment(1)
+                    });
+                    if (book.status == true) {
+                        userDoc.update({
+                            booksRead: firebase.firestore.FieldValue.increment(1)
+                        });
+                    };
+                    bookRef.add(book);
+                });
+
+                // Clear local array, calls setupBooks to clear grid prior to repopulation
+                anonLibrary = [];
+                setupBooks([]);
+            };
         }).catch(e => {
             console.log(e.message);
         });
@@ -112,6 +143,10 @@ signupForm.addEventListener('submit', (e) => {
         // Close modal and clear form
         resetModal('signup');
         notifyUser("pass", `User '${email.split('@')[0]}' has signed up! Welcome!`)
+    }).catch(e => {
+        // Error on signup
+        resetModal("signup");
+        notifyUser("fail", "Error: " + e.message);
     });
 });
 
@@ -140,10 +175,10 @@ loginForm.addEventListener('submit', (e) => {
     auth.signInWithEmailAndPassword(email, password).then(credentials => {
         // Close modal and clear form
         resetModal('login');
-
         notifyUser("pass", `User '${email.split('@')[0]}' has logged in!`)
     }).catch((e) => {
         // Error on login
-        console.log(e.message);
+        resetModal("login");
+        notifyUser("fail", "Error: " + e.message);
     });
 });

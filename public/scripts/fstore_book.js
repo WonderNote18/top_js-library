@@ -190,7 +190,7 @@ const markAsRead = function(bookID) {
         let userDoc = db.collection('users').doc(user.uid);
         userDoc.get().then(doc => {
             let docData = doc.data();
-            userDoc.update({booksRead: docData.booksRead + 1})
+            userDoc.update({booksRead: firebase.firestore.FieldValue.increment(1)})
         });
     } else {
         // Edit status value of Object in user's local array
@@ -263,10 +263,8 @@ bookForm.addEventListener('submit', (e) => {
 
         // Increment counters for user's booksTotal
         let userDoc = db.collection('users').doc(user.uid);
-        userDoc.get().then(doc => {
-            let docData = doc.data();
-            userDoc.update({booksTotal: docData.booksTotal += 1});
-        });
+        userDoc.update({booksTotal: firebase.firestore.FieldValue.increment(1)});
+
     } else {
         anonLibrary.push(bookEntry);
         setupBooks(anonLibrary);
