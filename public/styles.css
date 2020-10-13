@@ -40,15 +40,21 @@ label {
     transition: color .2s ease-out, -webkit-transform .2s ease-out;
     transform-origin: 0% 100%;
     text-align: initial;
-    transform: translateY(-10px);
+    transform: translateY(-12px);
 }
 ::-webkit-scrollbar {
     display: none;
 }
+.logged-out {
+    display: flex;
+}
+.logged-in {
+    display: none;
+}
 .modalOverlay {
-    background-color: #eee !important;
-    opacity: 0.2;
-    transition: all 0.3s;
+    background: #eeeeee !important;
+    opacity: 0.1;
+    transition: all 0.5s;
 }
 .menuFont {
     font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
@@ -66,21 +72,23 @@ label {
     border-radius: 12px;
     color: #FFFFFF;
     font-family: Sans;
-    font-size: 15px;
+    font-size: 1.4rem;
     font-weight: normal;
     letter-spacing: 0.8px;
     height: 36px;
-    width: 92px;
-    margin: 0;
-    box-shadow: 2px 3px 6px 0px #000000;
-    -webkit-box-shadow: 2px 3px 6px 0px #000000;
+    width: 95px;
+    margin: auto;
+    box-shadow: 2px 3px 4px 0px #000000;
+    -webkit-box-shadow: 2px 3px 4px 0px #000000;
     -moz-box-shadow: 4px 6px 12px 0px #000000;
-    text-shadow: 2px 3px 6px #000000;
+    text-shadow: 2px 3px 4px #000000;
     border: solid #363850 1px;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
     transition: all 0.1s;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .menuButton:hover {
     border: solid #1F202E 1px;
@@ -93,11 +101,34 @@ label {
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
-    transition: all 0.3s;
+    transition: all 0.15s;
+}
+.submit {
+    font-size: 1.2em;
+}
+.action {
+    float: left;
+    margin-right: 1em;
+    font-size: 1.2rem;
+    background: #81B29A;
+    background-image: -webkit-linear-gradient(top, #81B29A, #497760);
+    background-image: -moz-linear-gradient(top, #81B29A, #497760);
+    background-image: -ms-linear-gradient(top, #81B29A, #497760);
+    background-image: -o-linear-gradient(top, #81B29A, #497760);
+    background-image: linear-gradient(to bottom, #81B29A, #497760);
+}
+.action:hover {
+    background: #578E74;
+    background-image: -webkit-linear-gradient(top, #578E74, #3A5F4D);
+    background-image: -moz-linear-gradient(top, #578E74, #3A5F4D);
+    background-image: -ms-linear-gradient(top, #578E74, #3A5F4D);
+    background-image: -o-linear-gradient(top, #578E74, #3A5F4D);
+    background-image: linear-gradient(to bottom, #578E74, #3A5F4D);
+    transition: all 0.15s;
 }
 .modal {
     display: none;
-    z-index: 1003;
+    z-index: 1008;
     opacity: 1;
     top: 10%;
     transform: scaleX(1) scaleY(1);
@@ -106,7 +137,8 @@ label {
     right: 0;
     background-color: #fafafa;
     padding: 0;
-    max-height: 70%;
+    min-height: 50%;
+    max-height: 65%;
     width: 55%;
     margin: auto;
     overflow-y: auto;
@@ -118,10 +150,13 @@ label {
     margin-top: 20px;
     line-height: 1.5;
     font-size: 1.3rem;
-    transition: all 0.3s;
+    transition: all 0.5s;
 }
 .modalContent {
     padding: 24px;
+    margin: 0 auto;
+    width: 65%;
+    position: relative;
 }
 .modalHeader {
     margin: 1.52rem 0 .912rem 0;
@@ -129,12 +164,106 @@ label {
     font-size: 2.45rem;
     font-weight: 400;
     padding-bottom: 22px;
+    overflow: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+.centerHeader {
+    text-align: center;
+    font-size: 3.1rem;
+    width: 100%;
+    margin: auto;
+    /* padding-bottom: 0; */
 }
 .userInput {
     position: relative;
     margin: 1rem 0;
     box-sizing: inherit;
     padding-bottom: 8px;
+}
+.account-details {
+    display: grid;
+    grid-template-columns: 2.2fr 3.6fr;
+    grid-template-rows: repeat(4, 3rem);
+    width: 85%;
+    margin: 0;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 65px;
+    padding-bottom: .14rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    grid-row-gap: .14rem;
+    background: #ddddddaa;
+    border: .14rem solid #ddddddaa;
+    overflow: scroll;
+}
+.confirmStatusDetails {
+    display: grid;
+    grid-template-columns: 2.2fr 3.6fr;
+    grid-template-rows: repeat(3, 3rem);
+    width: 85%;
+    margin: 0;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 65px;
+    padding-bottom: .14rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    grid-row-gap: .14rem;
+    background: #ddddddaa;
+    border: .14rem solid #ddddddaa;
+    overflow: scroll;
+}
+.modalTableField {
+    text-align: right;
+    background: #fafafa;
+    height: inherit;
+}
+.modalTableValue {
+    overflow-x: scroll;
+    padding-left: 2rem;
+    background: #fafafa;
+    height: inherit;
+}
+.account-buttons {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 5rem;
+    align-items: center;
+    z-index: 1010;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 15px;
+}
+.account-buttons-reset {
+    margin-right: auto;
+}
+.account-buttons-delete {
+    margin-left: auto;
+}
+.confirmStatusPrompt {
+    text-align: center;
+    height: 2rem;
+    margin: auto;
+}
+.confirmStatusButton {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 15px;
+    align-items: center;
+}
+.notifyFail {
+    color: #A93E20;
+}
+.notifyPass {
+    color: #497760;
 }
 .gridEntry {
     display: grid;
@@ -143,6 +272,7 @@ label {
     grid-template-columns: 2.5fr 1.5fr 1fr 1.5fr 1fr;
     border-bottom: 1px solid #00000044;
     overflow: auto;
+    height: inherit;
 }
 .gridCell {
     display: flex;
@@ -154,7 +284,7 @@ label {
 }
 .gridFont {
     font-family: Times;
-    font-size: 2em;
+    font-size: 1.5rem;
     text-align: center;
 }
 .gridHeaderFont {
@@ -193,9 +323,19 @@ label {
 .footerFont {
     font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;
     color: #FDF9F1CC !important;
-    font-size: 2em;
+    font-size: 1.8rem;
     letter-spacing: 0.04em;
     white-space: nowrap;
+}
+#modalContainer {
+    min-height: 100vh;
+    min-width: 100%;
+    z-index: 1005;
+    opacity: 0.94;
+    display: none;
+    position: fixed;
+    background: #000000bb;
+    transition: all 0.5s;
 }
 #libraryContainer {
     background: #f4f1de;
@@ -204,23 +344,23 @@ label {
     position: relative;
 }
 #headerContainer {
-    padding: 0px 15px 0 30px;
+    padding: 0px 15px 0 15px;
     margin: 0;
     display: grid;
     background: #e07a5f33;
-    grid-template-columns: 10fr 3fr;
-    grid-column-gap: 2vw;
+    grid-template-columns: minmax(0, 9fr) minmax(0, 4fr);
+    grid-column-gap: 20px;
+    overflow: auto;
 }
 #headerTitle {
     display: grid;
     grid-template-rows: 1fr 1fr;
     height: 60px;
     align-content: center;
-    vertical-align: center;
     overflow: hidden;
 }
 #titleText {
-    font-size: 3.5rem;
+    font-size: 3.7rem;
     font-variant: small-caps;
     letter-spacing: 0.2rem;
     position: relative;
@@ -229,8 +369,7 @@ label {
 }
 #subtitleText {
     color: #c46b53dd;
-    margin-left: 2px;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     letter-spacing: 1.1px;
     position: relative;
     margin: 0;
@@ -243,13 +382,18 @@ label {
     width: 100%;
     height: 60px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 110px);
+    grid-template-columns: repeat(auto-fit, 96px);
+    grid-column-gap: 0;
     justify-content: right;
+    justify-items: right;
+    /* overflow: auto; */
+    grid-auto-flow: column;
 }
 #headerMenuSection {
     position: relative;
-    display: flex;
     height: 100%;
+    width: 80%;
+    justify-items: center;
     align-items: center;
     margin: auto;
 }
@@ -264,30 +408,47 @@ label {
 #contentContainer {
     background: #FCF2E2;
     margin: 3vh auto 0 auto;
-    padding: 3vh 3% 8vh 3%;
+    padding: 3vh 5% 8vh 5%;
     height: 60%;
-    max-width: 75%;
+    max-width: 70%;
     box-shadow: 0px 0px 6px grey, 0px 0px 6px grey;
     overflow: scroll;
-    scrollbar-width: none !important;
+}
+#userActionsContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.5fr 8fr 1.5fr;
+    grid-row: 1;
+}
+#bookActionsLegacy {
+    background-color: #616691;
+}
+#userNotifications {
+    margin: auto 0;
+    font-weight: 600;
+    width: 100%
+}
+#bookActions {
+    margin: auto auto auto 0;
 }
 #newBookButton {
     display: inline-block;
     padding: 8px 16px;
     margin: 0 0.3em 0.3em 0;
-    border-radius: 2em;
-    border-color: #F8F6E9;
+    border-radius: 1.25em;
+    border-color: #AFB1C9;
     box-sizing: border-box;
     text-decoration: none;
     font-family: Bookman Old Style;
     font-weight: bold;
     color: white;
     background-color: #69A387;
-    transition: all 0.2s;
+    border-width: 2px;
+    transition: all 0.15s;
 }
 #newBookButton:hover {
-    background-color: #497760;
-    border-color: #4F5377;
+    background-color: #578E74;
+    border-color: #797EA6;
     font-weight: bold;
 }
 #bookSeparator {
@@ -305,27 +466,43 @@ label {
     padding-right: 3px;
     display: grid;
     gap: 0vh;
-    grid-template-columns: 2.5fr 1.5r 1fr 1.5fr 1fr;
     border: 1.5px solid black;
     overflow: hidden;
+    grid-template-columns: 2.5fr 1.5fr 1fr 1.5fr 1fr;
+    border-bottom: 1px solid #00000044;
+}
+#bookGridContainer {
+    margin: 0;
+    padding: 0;
+    background-color: #fdf9f1;
+    height: 71%;
+    border: 1px solid black;
+    position: relative;
+    overflow: auto;
 }
 #bookGrid {
     background-color: #fdf9f1;
     margin: 0;
     padding: 0;
     display: grid;
-    grid-auto-rows: 50px;
-    height: 75%;
+    grid-template-rows: auto 1fr;
     gap: 0vh;
-    border: 1px solid black;
     overflow-y: auto;
-    scrollbar-width: none !important;
+}
+#anonUserAlert {
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    color: #2E3045aa;
+    font-size: 2rem;
 }
 #footerContainer {
     background: #3d405b;
     height: 6.2vh;
     margin: 0;
-    padding: 0 2vw;
+    padding: 0 1vw;
     bottom: 0;
     left: 0;
     right: 0;
@@ -368,7 +545,7 @@ label {
 }
 #footerLinkText:hover {
     text-decoration: underline;
-    font-size: 1.1em;
+    font-size: 1.9rem;
 }
 #footerImages {
     text-align: center;

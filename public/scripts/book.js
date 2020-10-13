@@ -1,4 +1,4 @@
-
+// Legacy code to handle book creation, population, and status changes
 
 let myLibrary = [];
 

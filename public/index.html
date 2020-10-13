@@ -1,73 +1,95 @@
+<!-- TODO: Convert anonLibrary to Firestore upon registration -->
+<!-- TODO: Create modals for password reset and account deletion -->
 <html>
     <head>
         <title>Library - The Odin Project</title>
         <link rel="stylesheet" href="styles.css">
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
-
-        <!-- SDKs for Firebase Products -->
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-analytics.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
-        <script>
-            // Your web app's Firebase configuration
-            var firebaseConfig = {
-              apiKey: "AIzaSyBNDaaqkuabXasqBo5m3i2ViwH7hc2HEf8",
-              authDomain: "top-js-library.firebaseapp.com",
-              databaseURL: "https://top-js-library.firebaseio.com",
-              projectId: "top-js-library",
-              storageBucket: "top-js-library.appspot.com",
-              messagingSenderId: "1085660323907",
-              appId: "1:1085660323907:web:6a24dfa4cc0bc6e7c1b4f6",
-              measurementId: "G-PYJRWP2K8K"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            firebase.analytics();
-            const auth = firebase.auth();
-            const db = firebase.firestore();
-        </script>
     </head>
     <body>
-        <!-- Account Info Modal -->
-        <div id="modal-account" class="modal">
-            <div class="modalContent">
-                <h4 class="modalHeader">Account Info</h4>
-                <div class="account-details"></div>
+        <!-- Overlay Container for Modals -->
+        <div id="modalContainer">
+            <!-- Account Info Modal -->
+            <div id="modal-account" class="modal">
+                <div class="modalContent">
+                    <h4 class="modalHeader centerHeader">Account Info</h4>
+                    <div class="account-details"></div>
+                    <div class="account-buttons">
+                        <!-- <div class="account-buttons-reset">
+                            <button class="menuButton action">Reset Password</button>
+                        </div>
+                        <div class="account-buttons-delete">
+                            <button class="menuButton action">Delete Account</button>
+                        </div> -->
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- User Signup Modal -->
-        <div id="modal-signup" class="modal">
-            <div class="modalContent">
-                <h4 class="modalHeader">Sign Up</h4>
-                <form id="signupForm">
-                    <div class="userInput">
-                        <input type="email" id="signup-email" required />
-                        <label for="signup-email">Email Address</label>
-                    </div>
-                    <div class="userInput">
-                        <input type="password" id="signup-password" required />
-                        <label for="signup-password">Create Password</label>
-                    </div>
-                    <button class="menuButton">Sign Up</button>
-                </form>
+            <!-- User Signup Modal -->
+            <div id="modal-signup" class="modal">
+                <div class="modalContent">
+                    <h4 class="modalHeader">Sign Up</h4>
+                    <form id="signupForm">
+                        <div class="userInput">
+                            <input type="email" id="signup-email" required />
+                            <label for="signup-email">Email Address</label>
+                        </div>
+                        <div class="userInput">
+                            <input type="password" id="signup-password" required />
+                            <label for="signup-password">Create Password</label>
+                        </div>
+                        <button class="menuButton submit">Sign Up</button>
+                    </form>
+                </div>
             </div>
-        </div>
-        <!-- User Login Modal -->
-        <div id="modal-login" class="modal">
-            <div class="modalContent">
-                <h4 class="modalHeader">Login</h4>
-                <form id="loginForm">
-                    <div class="userInput">
-                        <input type="email" id="login-email" required />
-                        <label for="login-email">Email Address</label>
+            <!-- User Login Modal -->
+            <div id="modal-login" class="modal">
+                <div class="modalContent">
+                    <h4 class="modalHeader">Login</h4>
+                    <form id="loginForm">
+                        <div class="userInput">
+                            <input type="email" id="login-email" required />
+                            <label for="login-email">Email Address</label>
+                        </div>
+                        <div class="userInput">
+                            <input type="password" id="login-password" required />
+                            <label for="login-password">Password</label>
+                        </div>
+                        <button class="menuButton submit">Login</button>
+                    </form>
+                </div>
+            </div>
+            <!-- New Book Modal -->
+            <div id="modal-book" class="modal">
+                <div class="modalContent">
+                    <h4 class="modalHeader">New Book</h4>
+                    <form id="bookForm">
+                        <div class="userInput">
+                            <input type="text" id="book-title" required />
+                            <label for="book-title">Book Title</label>
+                        </div>
+                        <div class="userInput">
+                            <input type="text" id="book-author" required />
+                            <label for="book-author">Book Author</label>
+                        </div>
+                        <div class="userInput">
+                            <input type="number" id="book-pages" required />
+                            <label for="book-pages"># of Pages</label>
+                        </div>
+                        <button class="menuButton submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Read Book Modal -->
+            <div id="modal-bookRead" class="modal">
+                <div class="modalContent">
+                    <h4 class="modalHeader centerHeader">Read Book</h4>
+                    <div class="confirmStatusPrompt">
+                        Do you want to mark this book as Read?
                     </div>
-                    <div class="userInput">
-                        <input type="password" id="login-password" required />
-                        <label for="login-password">Password</label>
+                    <div class="confirmStatusDetails"></div>
+                    <div class="confirmStatusButton">
+                        <button id="confirmReadButton" class="menuButton submit">Read</button>
                     </div>
-                    <button class="menuButton">Login</button>
-                </form>
+                </div>
             </div>
         </div>
         <!-- Main Content -->
@@ -84,26 +106,32 @@
                 <!-- Header Account Menu -->
                 <div id="headerMenu">
                     <div id="headerMenuSection" class="logged-out">
-                        <button id="loginButton" class='menuButton' data-target="modal-login">Log In</button>
+                        <button id="loginButton" class='menuButton' data-target="modal-login" onclick='selectModal("login")'>Log In</button>
                     </div>
                     <div id="headerMenuSection" class="logged-out">
-                        <button id="signupButton" class='menuButton' data-target="modal-signup">Sign Up</button>
+                        <button id="signupButton" class='menuButton' data-target="modal-signup" onclick='selectModal("signup")'>Sign Up</button>
                     </div>
-                    <!-- <div id="headerMenuSection" class="logged-in">
-                        <button id="accountButton" class='menuButton' data-target="modal-account">Account</button>
+                    <div id="headerMenuSection" class="logged-in">
+                        <button id="accountButton" class='menuButton' data-target="modal-account" onclick='selectModal("account")'>Account</button>
                     </div>
                     <div id="headerMenuSection" class="logged-in">
                         <button id="logoutButton" class='menuButton'>Log Out</button>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <hr id="headerSeparator">
             <!-- Main Content -->
             <div id="contentContainer">
-                <button id="newBookButton" onclick="addBookToLibrary()">New Book</button>
+                <div id="userActionsContainer">
+                    <div id="bookActions">
+                        <button id="addBookButton" class="menuButton action" data-target="modal-book" onclick='selectModal("book")'>New Book</button>
+                    </div>
+                    <div id="userNotifications" class="gridFont notifyFail"></div>
+                    <div id="actionCenterBuffer"></div>
+                </div>
                 <hr id="bookSeparator">
                 <!-- Library Grid Header -->
-                <div id="bookGridHeader" class="gridEntry">
+                <div id="bookGridHeader">
                     <div class="gridCell gridFont gridHeaderFont">
                         <p>Title</p>
                     </div>
@@ -121,7 +149,13 @@
                     </div>
                 </div>
                 <!-- Library Items Container -->
-                <div id="bookGrid"></div>
+                <div id="bookGridContainer">
+                    <div id="bookGrid">
+                    </div>
+                    <div id="anonUserAlert" class="logged-out">
+                        <span>Log in to save your Library!</span>
+                    </div>
+                </div>
             </div>
             <!-- Page Footer -->
             <footer id="footerContainer" class="footerFont">
@@ -144,9 +178,40 @@
                 </div>
             </footer>
         </div>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+
+        <script>
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyBNDaaqkuabXasqBo5m3i2ViwH7hc2HEf8",
+                authDomain: "top-js-library.firebaseapp.com",
+                databaseURL: "https://top-js-library.firebaseio.com",
+                projectId: "top-js-library",
+                storageBucket: "top-js-library.appspot.com",
+                messagingSenderId: "1085660323907",
+                appId: "1:1085660323907:web:6a24dfa4cc0bc6e7c1b4f6",
+                measurementId: "G-PYJRWP2K8K"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            // firebase.analytics();
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+        </script>
+
         <!-- Authentication and Status -->
         <script src="scripts/auth.js"></script>
-        <!-- Library App -->
-        <script src="scripts/book.js"></script>
+        <!-- Legacy Library App -->
+        <!-- <script src="scripts/book.js"></script> -->
+        <!-- Firestore Library App -->
+        <script src="scripts/fstore_book.js"></script>
     </body>
 </html>
